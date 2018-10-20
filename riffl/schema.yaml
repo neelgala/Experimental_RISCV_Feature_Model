@@ -91,8 +91,12 @@ Hartids:
     default: [0]
 
 # ================================================================
+# Features: MSTATUS fields
+
+# ================================================================
 # Features: MIDELEG and MEDELEG WARL functions
 
+# TODO why is this so complicated
 MIDELEG:
     type: integer
 
@@ -101,3 +105,77 @@ MEDELEG:
 
 # ================================================================
 # Features: MIP and MIE WARL functions
+
+
+# ================================================================
+# Features: addresses for memory-mapped MSIP, MTIME and MTIMECMP
+MSIP_address:
+    type: integer
+    required: True
+MTIME_address:
+    type: integer
+    required: True
+MTIMECMP_address:
+    type: integer
+    required: True
+
+# ================================================================
+# Features: MTVEC implementation choices
+MTVEC_is_read_only:
+    type: boolean
+    required: True
+
+MTVEC_reset_value: # TODO extra checks
+    type:
+
+# ================================================================
+# Features: Hardware Performance Monitor CSRs
+
+MHPM3_exists:
+    type: boolean
+    default: False
+
+MHPMEVENT3_WARL_fn
+
+# ================================================================
+# Features: MEPC WARL function
+MEPC:
+    type: integer
+    required: True
+
+# ================================================================
+# Features: MCAUSE value on reset and NMI
+
+MCAUSE_on_reset:
+    type: integer
+    required: True
+
+MCAUSE_on_NMI: #TODO This cannot be 0 
+    type: integer
+    default: 0
+# ================================================================
+# Features: SATP WARL functions
+
+# ================================================================
+# Features: Virtual memory schemes
+Sv32:
+    type: boolean
+    default: False # TODO extra checks
+Sv39:
+    type: boolean
+    default: False # TODO extra checks
+Sv48:
+    type: boolean
+    default: False # TODO extra checks
+PTE_A_trap:
+    type: boolean
+    required: True # TODO extra checks
+PTE_D_trap:
+    type: boolean
+    required: True # TODO extra checks
+# ================================================================
+# Features: misc. implementation choices
+
+# ================================================================
+# Features: Memory system implementation choices
+
