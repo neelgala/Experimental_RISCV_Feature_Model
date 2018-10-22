@@ -15,15 +15,13 @@ Privilege_Spec_Version:
 XLEN:
     type: integer
     allowed: [32, 64]
-    required: True
+    default: 32
 
 # MISA Features
-# TODO: MXL should be inferred from XLEN itself.
-MISA_MXL_WARL_fn:
-    type: integer
-    min: 1
-    max: 2
-    default: 1  # 32
+MISA_MXL:
+    type: list
+    allowed: [1,  2,  3]
+    default: [1]  # XLEN=32
 
 MISA_A:
     type: boolean
@@ -55,15 +53,15 @@ MISA_M:
 
 MISA_N:
     type: boolean
-    default: False # TODO extra checks
+    default: False 
 
 MISA_Q:
     type: boolean
-    default: False # TODO extra checks
+    default: False
 
 MISA_S:
     type: boolean
-    default: False # TODO extra checks
+    default: False
 
 MISA_U:
     type: boolean
@@ -91,21 +89,54 @@ Hartids:
 
 ## ================================================================
 ## Features: MSTATUS fields
-#
+
+MSTATUS_SXL:
+    type: list
+    allowed: [1,  2,  3]
+    default: []
+
+MSTATUS_UXL:
+    type: list
+    allowed: [1,  2,  3]
+    default: []
+# TODO: TW and XS as per nikhil's def
+
+
 ## ================================================================
 ## Features: MIDELEG and MEDELEG WARL functions
-#
-## TODO why is this so complicated
-#MIDELEG:
-#    type: integer
-#
-#MEDELEG:
-#    type: integer
-#
+
+# This field will specify which of the interrupts in the machine mode
+# can delegated to a lower level privilege. A 0-bit indicates that
+# particular interrupt cannot be delegated.
+MIDELEG:
+    type: integer
+    max: 0xFFF
+    default: 0xFFF
+
+
+# This field will specify which of the exceptions in the machine mode
+# can delegated to a lower level privilege. A 0-bit indicates that
+# particular exception cannot be delegated.
+MEDELEG:
+    type: integer
+    default: 0x7FF
+
 ## ================================================================
 ## Features: MIP and MIE WARL functions
-#
-#
+
+# This field will describe all valid bits of MIP register which can be 
+# interpreted as Interrupts by the system in Machine Mode.
+MIP:
+  type: integer
+  default: 0xFFF
+  max: 0xFFF
+
+# This field will describe all valid bits of MIE register which can be 
+# used to enable or disable Interrupts in Machine Mode.
+MIE:
+  type: integer
+  max: 0xFFF
+
 ## ================================================================
 ## Features: addresses for memory-mapped MSIP, MTIME and MTIMECMP
 #MSIP_address:
