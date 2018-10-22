@@ -36,6 +36,8 @@ def specific_checks(foo):
         logger.error('MISA_S set without setting MISA_U')
         sys.exit(0)
 
+    ####################### HARTIDs field checks #########################
+    # Atleast one of the HARTIDs should be 0
     if 0 not in foo['Hartids']:
         logger.error('Atleast one of the HartIDs should be 0')
         sys.exit(0)
@@ -94,7 +96,8 @@ def specific_checks(foo):
         can only be supported if MISA_N is supported')
         sys.exit(0)
 
-    # Machine call in MEDELEG should be set to 0
+    # Machine call exception cannot be delegated therefore the MEDELEG bit
+    # should be 0
     if (foo['MEDELEG'] & 0x800)!=0:
         logger.error('Machine call from M-mode cannot be delegated')
         sys.exit(0)
