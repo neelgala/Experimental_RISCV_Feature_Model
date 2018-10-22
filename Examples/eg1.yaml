@@ -3,3 +3,5 @@
 # Standard
 
 XLEN: 32
+MISA_F: True
+MISA_D: True

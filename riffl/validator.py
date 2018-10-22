@@ -11,6 +11,13 @@ import logging
 
 logger= logging.getLogger(__name__)
 
+def specific_checks(foo):
+
+  if foo['MISA_D']:
+    if not foo['MISA_F']:
+      logger.error('MISA_D set without setting MISA_F')
+      sys.exit(0)
+
 def load_and_validate(foo, schema):
   
     """
@@ -29,6 +36,7 @@ def load_and_validate(foo, schema):
     schema_yaml=yaml.safe_load(schemafile)
     validator=Validator(schema_yaml)
     validator.allow_unknown = True
+    normalized=validator.normalized(inp_yaml,schema_yaml)
 
     # Perform Validation
     logger.info('Initiating Validation')
@@ -39,9 +47,11 @@ def load_and_validate(foo, schema):
     else:
       logger.error(validator.errors)
       sys.exit(0)
+
     
+    specific_checks(normalized)
+
     logger.info('Dumping out Normalized Checked YAML')
-    normalized=validator.normalized(inp_yaml,schema_yaml)
     file_name_split=foo.split('.')
     outfile=open(file_name_split[0]+'_checked.'+file_name_split[1],'w')
     yaml.dump(normalized, outfile, default_flow_style=False, allow_unicode=True)

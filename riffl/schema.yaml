@@ -36,11 +36,9 @@ MISA_C:
 MISA_D:
     type: boolean
     default: False
-    dependencies: MISA_A
 
 MISA_F:
     type: boolean
-    required: False
     default: False
 
 MISA_G:

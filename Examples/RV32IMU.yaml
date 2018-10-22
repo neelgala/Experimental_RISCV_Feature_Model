@@ -4,7 +4,7 @@
 
 User_Spec_Version: 2.3
 Privilege_Spec_Version: 1.10
-XLEN: 32
+XLEN: 64
 Traps_on_unaligned_mem_access: True
 Reset_PC: 0x1000
 WFI_is_nop: False
@@ -17,7 +17,6 @@ MTIME_address: 0x_0200_bFF8
 MTIMECMP_address: 0x_0200_4000
 MCAUSE_on_reset: 0
 
-MISA_D: True
 MISA_U: True
 CYCLE_defined: True
 TIME_defined: False
